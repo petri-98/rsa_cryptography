@@ -1,6 +1,6 @@
 import random
 
-from math_utils import euclidean_algo, extended_GCD, fast_power, find_prime
+from .math_utils import euclidean_algo, extended_GCD, fast_power, find_prime
 
 
 def generate_RSA_Key(b):
