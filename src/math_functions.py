@@ -28,7 +28,7 @@ def fastPowerSmall(g,A,N):
         a = a*a % N
     return b
 
-def findRoot5(c,e,p,q):
+def findRoot(c,e,p,q):
     if euclidean_algo(e,(p-1)*(q-1)) == 1:
         m = (p-1)*(q-1)/euclidean_algo(p-1,q-1)
         d = extendedGCD(e,m)[1] % m
