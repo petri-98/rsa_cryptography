@@ -5,7 +5,7 @@ def euclidean_algo(a,b):
         return b
     return euclidean_algo(b, a % b)
 
-def extendedGCD(a,b):
+def extended_GCD(a,b):
     u = 1
     g = a
     x = 0
@@ -18,7 +18,7 @@ def extendedGCD(a,b):
     v = (g - a*u)//b
     return [g,u,v]
 
-def fastPowerSmall(g,A,N):
+def fast_power(g,A,N):
     a = g
     b = 1
     while A>0:
@@ -28,26 +28,26 @@ def fastPowerSmall(g,A,N):
         a = a*a % N
     return b
 
-def findRoot(c,e,p,q):
+def find_root(c,e,p,q):
     if euclidean_algo(e,(p-1)*(q-1)) == 1:
         m = (p-1)*(q-1)/euclidean_algo(p-1,q-1)
-        d = extendedGCD(e,m)[1] % m
-        return fastPowerSmall(c,d,p*q)
+        d = extended_GCD(e,m)[1] % m
+        return fast_power(c,d,p*q)
     else:
         raise Exception("Error: e and (p-1)*(q-1) must be coprimes")
 
-def pow2_times_odd(m):
+def count_powers_two(m):
     k = 0
     while m%2 == 0:
         k += 1
         m //= 2
     return k,m
 
-def millerRabin(a, n):
+def miller_rabin(a, n):
     if (n%2 == 0 or 1 < euclidean_algo(a,n) < n):
         return True
-    k, q = pow2_times_odd(n-1)
-    a = fastPowerSmall(a,q,n)
+    k, q = count_powers_two(n-1)
+    a = fast_power(a,q,n)
         
     if a % n == 1:
         return False
@@ -58,17 +58,17 @@ def millerRabin(a, n):
         a = a*a % n
     return True
 
-def probablyPrime(n):
+def probably_prime(n):
     for _ in range(20):
         a = random.randrange(2, n)
-        if millerRabin(int(a),n) == True:
+        if miller_rabin(int(a),n) == True:
             return False
     return True
 
-def findPrime(lowerBound, upperBound):
+def find_prime(lowerBound, upperBound):
     n = random.randrange(lowerBound, upperBound)
-    while not probablyPrime(n):
+    while not probably_prime(n):
         n = random.randrange(lowerBound, upperBound)
-        if probablyPrime(n) == True:
+        if probably_prime(n) == True:
             return n
     return n
