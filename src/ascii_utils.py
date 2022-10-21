@@ -19,7 +19,7 @@ def text_to_int(text: str) -> int:
     return number
 
 
-def intToText(number: int) -> str:
+def int_to_text(number: int) -> str:
     """Returns the string corresponding to the given encoded input.
 
     Args:
