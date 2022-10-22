@@ -9,11 +9,16 @@ def read_cmd_params() -> argparse.Namespace:
     cmd_args = parser.parse_args()
     return cmd_args
 
+
 if __name__ == '__main__':
     cmd_args = read_cmd_params()
 
-    mode = str(input('Do you want to encrypt [E] or decrypt [D] a message? '))
-    if mode.lower() == 'e':
+    mode = str(input('Do you want to encrypt a message [E], decrypt a message [D] or generate a key [G]? '))
+    if mode.lower() == 'g':
+        key = generate_RSA_Key(cmd_args.lenght)
+        print(f'Public key:\n {key[0]}')
+        print(f'Private key:\n {key[1]}')
+    elif mode.lower() == 'e':
         msg = str(input('Insert the message you want to encode: '))
         public_key_input = input('Insert the public key (two numbers with a space in between): ')
         public_key = [int(x) for x in public_key_input.split()]
@@ -27,5 +32,3 @@ if __name__ == '__main__':
         print(f'Your decrypted message is:\n {msg}')
     else:
         print('Not a valid mode.')
-
-
