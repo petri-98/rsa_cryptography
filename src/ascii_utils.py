@@ -2,6 +2,7 @@
 More info in README.md
 '''
 
+
 def text_to_int(text: str) -> int:
     """Returns the ASCII encoding of the given string.
 
