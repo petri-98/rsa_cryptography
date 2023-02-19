@@ -28,5 +28,5 @@ def rsa_encrypt(message, public_key):
     return fast_power(message, public_key[1], public_key[0])
 
 
-def RSA_decrypt(cipher, private_key):
+def rsa_decrypt(cipher, private_key):
     return fast_power(cipher, private_key[1], private_key[0])
