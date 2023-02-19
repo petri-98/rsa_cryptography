@@ -1,13 +1,16 @@
 import random
 
 
+#TODO add docstrings
+
+
 def euclidean_algo(a, b):
     if a % b == 0:
         return b
     return euclidean_algo(b, a % b)
 
 
-def extended_GCD(a, b):
+def extended_gcd(a, b):
     u = 1
     g = a
     x = 0
@@ -18,24 +21,24 @@ def extended_GCD(a, b):
         u, g = x, y
         x, y = s, t
     v = (g - a * u) // b
-    return [g, u, v]
+    return g, u, v
 
 
-def fast_power(g, A, N):
+def fast_power(g, l, n):
     a = g
     b = 1
-    while A > 0:
-        if A % 2 == 1:
-            b = b * a % N
-        A = A // 2
-        a = a * a % N
+    while l > 0:
+        if l % 2 == 1:
+            b = b * a % n
+        l = l // 2
+        a = a * a % n
     return b
 
 
 def find_root(c, e, p, q):
     if euclidean_algo(e, (p - 1) * (q - 1)) == 1:
         m = (p - 1) * (q - 1) / euclidean_algo(p - 1, q - 1)
-        d = extended_GCD(e, m)[1] % m
+        d = extended_gcd(e, m)[1] % m
         return fast_power(c, d, p * q)
     else:
         raise Exception("Error: e and (p-1)*(q-1) must be coprimes")
