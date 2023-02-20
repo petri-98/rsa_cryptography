@@ -4,12 +4,6 @@ import random
 #TODO add docstrings
 
 
-def euclidean_algo(a, b):
-    if a % b == 0:
-        return b
-    return euclidean_algo(b, a % b)
-
-
 def extended_gcd(a, b):
     u = 1
     g = a
@@ -36,8 +30,8 @@ def fast_power(g, l, n):
 
 
 def find_root(c, e, p, q):
-    if euclidean_algo(e, (p - 1) * (q - 1)) == 1:
-        m = (p - 1) * (q - 1) / euclidean_algo(p - 1, q - 1)
+    if extended_gcd(e, (p - 1) * (q - 1))[0] == 1:
+        m = (p - 1) * (q - 1) / extended_gcd(p - 1, q - 1)[0]
         d = extended_gcd(e, m)[1] % m
         return fast_power(c, d, p * q)
     else:
@@ -53,7 +47,7 @@ def count_powers_two(m):
 
 
 def miller_rabin(a, n):
-    if (n % 2 == 0 or 1 < euclidean_algo(a, n) < n):
+    if (n % 2 == 0 or 1 < extended_gcd(a, n)[0] < n):
         return True
     k, q = count_powers_two(n - 1)
     a = fast_power(a, q, n)
@@ -76,10 +70,10 @@ def probably_prime(n):
     return True
 
 
-def find_prime(lowerBound, upperBound):
-    n = random.randrange(lowerBound, upperBound)
+def find_prime(lower_bound, upper_bound):
+    n = random.randrange(lower_bound, upper_bound)
     while not probably_prime(n):
-        n = random.randrange(lowerBound, upperBound)
+        n = random.randrange(lower_bound, upper_bound)
         if probably_prime(n) == True:
             return n
     return n
